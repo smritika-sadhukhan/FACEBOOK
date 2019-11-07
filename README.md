@@ -1,29 +1,25 @@
-# FACEBOOK
+### Problem statement: 
+Given a directed social graph, have to predict missing links to recommend users (Link Prediction in graph)
 
-#Importing Libraries
-# please do go through this python notebook: 
-import warnings
-warnings.filterwarnings("ignore")
+### Data Overview
+Taken data from facebook's recruting challenge on kaggle https://www.kaggle.com/c/FacebookRecruiting  
+data contains two columns source and destination eac edge in graph 
+    - Data columns (total 2 columns):  
+    - source_node         int64  
+    - destination_node    int64  
 
-import csv
-import pandas as pd#pandas to create small dataframes 
-import datetime #Convert to unix time
-import time #Convert to unix time
-# if numpy is not installed already : pip3 install numpy
-import numpy as np#Do aritmetic operations on arrays
-# matplotlib: used to plot graphs
-import matplotlib
-import matplotlib.pylab as plt
-import seaborn as sns#Plots
-from matplotlib import rcParams#Size of plots  
-from sklearn.cluster import MiniBatchKMeans, KMeans#Clustering
-import math
-import pickle
-import os
-# to install xgboost: pip3 install xgboost
-import xgboost as xgb
+### Mapping the problem into supervised learning problem:
+- Generated training samples of good and bad links from given directed graph and for each link got some features like no of followers, is he followed back, page rank, katz score, adar index, some svd fetures of adj matrix, some weight features etc. and trained ml model based on these features to predict link. 
+- Some reference papers and videos :  
+    - https://www.cs.cornell.edu/home/kleinber/link-pred.pdf
+    - https://www3.nd.edu/~dial/publications/lichtenwalter2010new.pdf
+    - https://kaggle2.blob.core.windows.net/forum-message-attachments/2594/supervised_link_prediction.pdf
+    - https://www.youtube.com/watch?v=2M77Hgy17cg
 
-import warnings
-import networkx as nx
-import pdb
-import pickle
+### Business objectives and constraints:  
+- No low-latency requirement.
+- Probability of prediction is useful to recommend ighest probability links
+
+### Performance metric for supervised learning:  
+- Both precision and recall is important so F1 score is good choice
+- Confusion matrix
